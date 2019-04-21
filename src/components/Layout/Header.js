@@ -24,7 +24,7 @@ const styles = {
 };
 
 const header = props => {
-  const { classes } = props;
+  const { classes, onCreateExercise } = props;
 
   return (
     <AppBar position="static">
@@ -39,7 +39,10 @@ const header = props => {
         <Typography variant="h6" color="inherit" className={classes.grow}>
           News
         </Typography>
-        <CreateDialog muscles={props.muscles} />
+        <CreateDialog
+          muscles={props.muscles}
+          onCreateExercise={onCreateExercise}
+        />
       </Toolbar>
     </AppBar>
   );

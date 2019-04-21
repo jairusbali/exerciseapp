@@ -5,8 +5,12 @@ import {
   Paper,
   List,
   ListItem,
-  ListItemText
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton
 } from "@material-ui/core";
+
+import Delete from "@material-ui/icons/Delete";
 
 const styles = {
   Paper: {
@@ -23,6 +27,7 @@ export default ({
   onSelect,
   exercise: {
     id,
+    exercise,
     title = "Welcome!",
     description = "Please select an exercise on the left."
   }
@@ -33,7 +38,7 @@ export default ({
       <Paper style={styles.Paper}>
         {exercises.map(([group, exercises]) => {
           return !category || category === group ? (
-            <>
+            <div key={group}>
               <Typography
                 variant="headline"
                 style={{ textTransform: "capitalize" }}
@@ -45,11 +50,16 @@ export default ({
                   return (
                     <ListItem onClick={() => onSelect(id)} key={title} button>
                       <ListItemText primary={title} />
+                      <ListItemSecondaryAction>
+                        <IconButton>
+                          <Delete />
+                        </IconButton>
+                      </ListItemSecondaryAction>
                     </ListItem>
                   );
                 })}
               </List>
-            </>
+            </div>
           ) : null;
         })}
       </Paper>

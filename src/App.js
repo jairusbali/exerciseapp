@@ -26,7 +26,7 @@ const styles = theme => ({
   }
 });
 
-const getExercises = exercises => {
+const formattedExercises = exercises => {
   return Object.entries(
     exercises.reduce((exercises, exercise) => {
       const { muscles } = exercise;
@@ -40,40 +40,41 @@ const getExercises = exercises => {
   );
 };
 
-// added this comment for pull request
-const getExercise = id => {
-  return exercises.find(exercise => exercise.id === id);
-};
-
 const app = props => {
   const { classes } = props;
 
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedExerciseId, setSelectedExerciseId] = useState("");
 
-  const [allExercises, setAllExercises] = useState(getExercises(exercises));
+  const [allExercises, setAllExercises] = useState(exercises);
 
   // const allExercises = getExercises(exercises);
   // console.log(allExercises);
 
+  // changed id -> title
+  const getExercise = id => {
+    return allExercises.find(exercise => exercise.id === id);
+  };
+
   const onCreateExerciseHandler = exercise => {
     const updatedExerciseList = [...allExercises, exercise];
+
+    console.log(updatedExerciseList);
     setAllExercises(updatedExerciseList);
   };
 
-  useEffect(() => {
-    console.log("selectedCategory", selectedCategory);
-    console.log("selectedExerciseId", selectedExerciseId);
-  }, [selectedCategory, selectedExerciseId]);
+  useEffect(() => {}, [selectedCategory, selectedExerciseId]);
+
+  const formattedExerciseList = formattedExercises(allExercises);
 
   return (
-    <>
+    <div>
       <Header muscles={muscles} onCreateExercise={onCreateExerciseHandler} />
       <Exercises
         exercise={selectedExerciseId ? getExercise(selectedExerciseId) : {}}
         onSelect={setSelectedExerciseId}
         category={selectedCategory}
-        exercises={allExercises}
+        exercises={formattedExerciseList}
       />
 
       <Footer
@@ -81,7 +82,7 @@ const app = props => {
         category={selectedCategory}
         onSelect={setSelectedCategory}
       />
-    </>
+    </div>
   );
 };
 

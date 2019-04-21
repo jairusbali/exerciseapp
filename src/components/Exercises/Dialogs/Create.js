@@ -17,35 +17,53 @@ import InputLabel from "@material-ui/core/InputLabel";
 
 import TextField from "@material-ui/core/TextField";
 
+const initialExerciseState = {
+  exercise: {
+    title: "",
+    description: "",
+    muscles: "",
+    id: ""
+  }
+};
+
 export default props => {
   const [isOpen, setOpen] = useState(false);
 
-  const [exerciseInfo, setExercise] = useState({
-    exercise: {
-      title: "",
-      description: "",
-      muscles: ""
-    }
-  });
+  const [exerciseInfo, setExercise] = useState(initialExerciseState);
 
-  const { muscles } = props;
+  const { muscles, onCreateExercise } = props;
 
-  // const {
-  //   exercise: { muscles }
-  // } = { exerciseInfo };
-
-  const handleChange = event => {
+  // identifier for the "select" component
+  const handleChange = (event, identifier) => {
     const { exercise } = { ...exerciseInfo };
 
-    exercise[event.target.name] = event.target.value;
+    if (identifier) {
+      exercise[event.target.name] = identifier.key;
+    } else {
+      exercise[event.target.name] = event.target.value;
+    }
     setExercise({ exercise });
+  };
+
+  const handleSubmit = () => {
+    const { exercise } = { ...exerciseInfo };
+    const currExercise = {
+      ...exercise,
+      id: exercise.title.toLowerCase().replace(/ /g, "-")
+    };
+
+    onCreateExercise(currExercise);
+
+    // close modal and set exercise state to initial state
+    setExercise(initialExerciseState);
+    setOpen(false);
   };
 
   return (
     <div>
-      <Button variant="fab" color="primary" mini onClick={() => setOpen(true)}>
+      <Fab color="primary" onClick={() => setOpen(true)}>
         <Add />
-      </Button>
+      </Fab>
       <Dialog
         open={isOpen}
         onClose={() => setOpen(false)}
@@ -57,32 +75,33 @@ export default props => {
           <form>
             <FormControl margin="normal" required fullWidth>
               <TextField
-                required
                 name="title"
-                id="standard-required"
-                label="Required"
-                placeholder="placeholder"
+                label="Title"
                 onChange={handleChange}
                 margin="normal"
               />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="muscles">Muscles</InputLabel>
-              <Select value={muscles} onChange={handleChange}>
+              <InputLabel>Muscle group</InputLabel>
+              <Select
+                value={exerciseInfo.exercise.muscles}
+                name="muscles"
+                onChange={handleChange}
+              >
                 {muscles.map(category => (
-                  <MenuItem value={category}>{category}</MenuItem>
+                  <MenuItem key={category} value={category}>
+                    {category}
+                  </MenuItem>
                 ))}
               </Select>
               <FormHelperText>Required</FormHelperText>
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <TextField
-                required
                 name="description"
-                id="standard-required"
-                label="Required"
+                label="Description"
                 multiline
-                placeholder="description"
+                rows={4}
                 onChange={handleChange}
                 margin="normal"
               />
@@ -97,11 +116,7 @@ export default props => {
           >
             Cancel
           </Button>
-          <Button
-            variant="contained"
-            onClick={() => setOpen(false)}
-            color="primary"
-          >
+          <Button variant="contained" onClick={handleSubmit} color="primary">
             Add
           </Button>
         </DialogActions>
