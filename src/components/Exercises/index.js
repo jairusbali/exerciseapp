@@ -35,7 +35,6 @@ export default ({
   onEditSelect,
   exercise
 }) => {
-  console.log("oncreate insde index", onCreate);
   const [editMode, setEditMode] = useState(false);
 
   const saveEdit = id => {
@@ -108,9 +107,10 @@ export default ({
           {editMode ? (
             <Form
               editMode
+              setEditMode={setEditMode}
               exercise={exercise}
               onCreate={onCreate}
-              saveEdit={saveEdit}
+              onSaveEdit={saveEdit}
               muscles={muscles}
             />
           ) : (

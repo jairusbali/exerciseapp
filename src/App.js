@@ -68,8 +68,7 @@ const app = props => {
 
   const onCreateExerciseHandler = exercise => {
     const updatedExerciseList = [...allExercises, exercise];
-    console.log("adding", exercise);
-    console.log("new list", updatedExerciseList);
+
     setAllExercises(updatedExerciseList);
   };
 
