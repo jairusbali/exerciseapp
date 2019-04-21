@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Grid,
   Typography,
@@ -12,6 +12,8 @@ import {
 
 import Delete from "@material-ui/icons/Delete";
 import Edit from "@material-ui/icons/Edit";
+
+import Form from "./Form";
 
 const styles = {
   Paper: {
@@ -28,51 +30,97 @@ export default ({
   onSelect,
   onDelete,
   onEdit,
-  exercise: {
+  muscles,
+  onCreate,
+  onEditSelect,
+  exercise
+}) => {
+  console.log("oncreate insde index", onCreate);
+  const [editMode, setEditMode] = useState(false);
+
+  const saveEdit = id => {
+    setEditMode(false);
+
+    onEdit(id);
+  };
+  const editSelected = id => {
+    onEditSelect(id);
+    setEditMode(true);
+  };
+
+  const deleteSelected = id => {
+    onDelete(id);
+    setEditMode(false);
+  };
+
+  const itemSelected = id => {
+    onSelect(id);
+    setEditMode(false);
+  };
+
+  const {
     title = "Welcome!",
     description = "Please select an exercise on the left."
-  }
-}) => (
-  <Grid container>
-    <Grid item xs={6}>
-      {/* <LeftPane styles={styles} /> */}
-      <Paper style={styles.Paper}>
-        {exercises.map(([group, exercises]) => {
-          return !category || category === group ? (
-            <div key={group}>
-              <Typography
-                variant="headline"
-                style={{ textTransform: "capitalize" }}
-              >
-                {group}
-              </Typography>
-              <List component="ul">
-                {exercises.map(({ title, id }) => {
-                  return (
-                    <ListItem onClick={() => onSelect(id)} key={title} button>
-                      <ListItemText primary={title} />
-                      <ListItemSecondaryAction>
-                        <IconButton onClick={() => onDelete(id)}>
-                          <Delete />
-                        </IconButton>
-                        <IconButton onClick={() => onEdit(id)}>
-                          <Edit />
-                        </IconButton>
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                  );
-                })}
-              </List>
-            </div>
-          ) : null;
-        })}
-      </Paper>
+  } = exercise;
+
+  return (
+    <Grid container>
+      <Grid item xs={6}>
+        {/* <LeftPane styles={styles} /> */}
+        <Paper style={styles.Paper}>
+          {exercises.map(([group, exercises]) => {
+            return !category || category === group ? (
+              <div key={group}>
+                <Typography
+                  variant="headline"
+                  style={{ textTransform: "capitalize" }}
+                >
+                  {group}
+                </Typography>
+                <List component="ul">
+                  {exercises.map(({ title, id }) => {
+                    return (
+                      <ListItem
+                        onClick={() => itemSelected(id)}
+                        key={title}
+                        button
+                      >
+                        <ListItemText primary={title} />
+                        <ListItemSecondaryAction>
+                          <IconButton onClick={() => deleteSelected(id)}>
+                            <Delete />
+                          </IconButton>
+                          <IconButton onClick={() => editSelected(id)}>
+                            <Edit />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              </div>
+            ) : null;
+          })}
+        </Paper>
+      </Grid>
+      <Grid item xs={6}>
+        <Paper style={styles.Paper}>
+          {editMode ? (
+            <Form
+              editMode
+              exercise={exercise}
+              onCreate={onCreate}
+              saveEdit={saveEdit}
+              muscles={muscles}
+            />
+          ) : (
+            <>
+              <Typography variant="display1">{title}</Typography>
+              <Typography variant="subheading">{description}</Typography>
+            </>
+          )}
+        </Paper>
+      </Grid>
     </Grid>
-    <Grid item xs={6}>
-      <Paper style={styles.Paper}>
-        <Typography variant="display1">{title}</Typography>
-        <Typography variant="subheading">{description}</Typography>
-      </Paper>
-    </Grid>
-  </Grid>
-);
+  );
+};

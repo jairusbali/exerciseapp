@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
-import CreateDialog from "../Exercises/Dialogs/Create";
+import CreateDialog from "../Exercises/Create";
 
 const styles = {
   root: {

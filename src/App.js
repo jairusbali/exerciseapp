@@ -51,7 +51,6 @@ const app = props => {
   // const allExercises = getExercises(exercises);
   // console.log(allExercises);
 
-  // changed id -> title
   const getExercise = id => {
     return allExercises.find(exercise => exercise.id === id);
   };
@@ -69,12 +68,23 @@ const app = props => {
 
   const onCreateExerciseHandler = exercise => {
     const updatedExerciseList = [...allExercises, exercise];
-
+    console.log("adding", exercise);
+    console.log("new list", updatedExerciseList);
     setAllExercises(updatedExerciseList);
   };
 
-  const onEditHandler = id => {
+  const exerciseSelectEditHandler = id => {
     setSelectedExerciseId(id);
+  };
+
+  const onEditHandler = exercise => {
+    // get all exercises NOT being edited
+    const exercisesNotBeingEdited = allExercises.filter(ex => {
+      return ex.id !== exercise.id;
+    });
+
+    // append the newly edited exercise to the set
+    setAllExercises([...exercisesNotBeingEdited, exercise]);
   };
 
   useEffect(() => {}, [selectedCategory, selectedExerciseId]);
@@ -85,8 +95,11 @@ const app = props => {
     <div>
       <Header muscles={muscles} onCreateExercise={onCreateExerciseHandler} />
       <Exercises
+        muscles={muscles}
         onDelete={deleteExerciseHandler}
+        onEditSelect={exerciseSelectEditHandler}
         onEdit={onEditHandler}
+        onCreate={onCreateExerciseHandler}
         exercise={selectedExerciseId ? getExercise(selectedExerciseId) : {}}
         onSelect={setSelectedExerciseId}
         category={selectedCategory}
