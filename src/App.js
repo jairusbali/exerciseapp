@@ -40,6 +40,7 @@ const getExercises = exercises => {
   );
 };
 
+// added this comment for pull request
 const getExercise = id => {
   return exercises.find(exercise => exercise.id === id);
 };
