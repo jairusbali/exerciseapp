@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 
 import Delete from "@material-ui/icons/Delete";
+import Edit from "@material-ui/icons/Edit";
 
 const styles = {
   Paper: {
@@ -26,6 +27,7 @@ export default ({
   category,
   onSelect,
   onDelete,
+  onEdit,
   exercise: {
     title = "Welcome!",
     description = "Please select an exercise on the left."
@@ -52,6 +54,9 @@ export default ({
                       <ListItemSecondaryAction>
                         <IconButton onClick={() => onDelete(id)}>
                           <Delete />
+                        </IconButton>
+                        <IconButton onClick={() => onEdit(id)}>
+                          <Edit />
                         </IconButton>
                       </ListItemSecondaryAction>
                     </ListItem>

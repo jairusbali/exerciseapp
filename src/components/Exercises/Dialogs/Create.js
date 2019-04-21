@@ -17,6 +17,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 
 import TextField from "@material-ui/core/TextField";
 
+import Form from "../Form";
+
 const initialExerciseState = {
   exercise: {
     title: "",
@@ -72,41 +74,11 @@ export default props => {
         <DialogTitle id="form-dialog-title">Create new exercise</DialogTitle>
         <DialogContent>
           <DialogContentText>Fill out the form below.</DialogContentText>
-          <form>
-            <FormControl margin="normal" required fullWidth>
-              <TextField
-                name="title"
-                label="Title"
-                onChange={handleChange}
-                margin="normal"
-              />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel>Muscle group</InputLabel>
-              <Select
-                value={exerciseInfo.exercise.muscles}
-                name="muscles"
-                onChange={handleChange}
-              >
-                {muscles.map(category => (
-                  <MenuItem key={category} value={category}>
-                    {category}
-                  </MenuItem>
-                ))}
-              </Select>
-              <FormHelperText>Required</FormHelperText>
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <TextField
-                name="description"
-                label="Description"
-                multiline
-                rows={4}
-                onChange={handleChange}
-                margin="normal"
-              />
-            </FormControl>
-          </form>
+          <Form
+            handleChange={handleChange}
+            muscles={muscles}
+            selectedMuscleGroup={exerciseInfo.exercise.muscles}
+          />
         </DialogContent>
         <DialogActions>
           <Button

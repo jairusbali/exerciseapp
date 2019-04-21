@@ -57,7 +57,6 @@ const app = props => {
   };
 
   const deleteExerciseHandler = id => {
-    console.log("id passed into delete exercise", id);
     // get the id
     const updatedList = allExercises.filter(elem => {
       return elem.id !== id;
@@ -74,6 +73,10 @@ const app = props => {
     setAllExercises(updatedExerciseList);
   };
 
+  const onEditHandler = id => {
+    setSelectedExerciseId(id);
+  };
+
   useEffect(() => {}, [selectedCategory, selectedExerciseId]);
 
   const formattedExerciseList = formattedExercises(allExercises);
@@ -83,6 +86,7 @@ const app = props => {
       <Header muscles={muscles} onCreateExercise={onCreateExerciseHandler} />
       <Exercises
         onDelete={deleteExerciseHandler}
+        onEdit={onEditHandler}
         exercise={selectedExerciseId ? getExercise(selectedExerciseId) : {}}
         onSelect={setSelectedExerciseId}
         category={selectedCategory}
