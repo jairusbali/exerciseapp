@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import "./App.css";
-
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-
 import { withStyles } from "@material-ui/core/styles";
 
 import { Header, Footer } from "./components/Layout/";
@@ -27,16 +22,21 @@ const styles = theme => ({
 });
 
 const formattedExercises = exercises => {
+  // create an array of arrays
+  // key is a muscle group and value is an array
+  // of exercises for that muscle
+  const initialExercises = muscles.reduce((acc, curr) => {
+    return { ...acc, [curr]: [] };
+  }, {});
+
   return Object.entries(
     exercises.reduce((exercises, exercise) => {
       const { muscles } = exercise;
 
-      exercises[muscles] = exercises[muscles]
-        ? [...exercises[muscles], exercise]
-        : [exercise];
+      exercises[muscles] = [...exercises[muscles], exercise];
 
       return exercises;
-    }, {})
+    }, initialExercises)
   );
 };
 
@@ -56,10 +56,21 @@ const app = props => {
     return allExercises.find(exercise => exercise.id === id);
   };
 
+  const deleteExerciseHandler = id => {
+    console.log("id passed into delete exercise", id);
+    // get the id
+    const updatedList = allExercises.filter(elem => {
+      return elem.id !== id;
+    });
+
+    // reset selectedExerciseId
+    setSelectedExerciseId("");
+    setAllExercises(updatedList);
+  };
+
   const onCreateExerciseHandler = exercise => {
     const updatedExerciseList = [...allExercises, exercise];
 
-    console.log(updatedExerciseList);
     setAllExercises(updatedExerciseList);
   };
 
@@ -71,6 +82,7 @@ const app = props => {
     <div>
       <Header muscles={muscles} onCreateExercise={onCreateExerciseHandler} />
       <Exercises
+        onDelete={deleteExerciseHandler}
         exercise={selectedExerciseId ? getExercise(selectedExerciseId) : {}}
         onSelect={setSelectedExerciseId}
         category={selectedCategory}
