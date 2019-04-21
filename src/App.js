@@ -51,8 +51,15 @@ const app = props => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedExerciseId, setSelectedExerciseId] = useState("");
 
-  const allExercises = getExercises(exercises);
-  console.log(allExercises);
+  const [allExercises, setAllExercises] = useState(getExercises(exercises));
+
+  // const allExercises = getExercises(exercises);
+  // console.log(allExercises);
+
+  const onCreateExerciseHandler = exercise => {
+    const updatedExerciseList = [...allExercises, exercise];
+    setAllExercises(updatedExerciseList);
+  };
 
   useEffect(() => {
     console.log("selectedCategory", selectedCategory);
@@ -61,7 +68,7 @@ const app = props => {
 
   return (
     <>
-      <Header muscles={muscles} />
+      <Header muscles={muscles} onCreateExercise={onCreateExerciseHandler} />
       <Exercises
         exercise={selectedExerciseId ? getExercise(selectedExerciseId) : {}}
         onSelect={setSelectedExerciseId}
