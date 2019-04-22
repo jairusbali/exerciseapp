@@ -112,7 +112,7 @@ const form = props => {
           className={classes.button}
           variant="contained"
           onClick={() => saveEdit()}
-          color="primary"
+          color="secondary"
           disabled={disableButton}
         >
           Save
@@ -123,7 +123,7 @@ const form = props => {
             className={classes.button}
             variant="contained"
             onClick={() => setOpen(false)}
-            color="primary"
+            color="secondary"
           >
             Cancel
           </Button>
@@ -131,7 +131,7 @@ const form = props => {
             className={classes.button}
             variant="contained"
             onClick={handleModalSubmit}
-            color="primary"
+            color="secondary"
             disabled={disableButton}
           >
             Add
