@@ -76,7 +76,7 @@ export default withStyles(styles)(
               return !category || category === group ? (
                 <div key={group}>
                   <Typography
-                    variant="headline"
+                    variant="h5"
                     style={{ textTransform: "capitalize" }}
                   >
                     {group}
@@ -120,8 +120,8 @@ export default withStyles(styles)(
               />
             ) : (
               <>
-                <Typography variant="display1">{title}</Typography>
-                <Typography variant="subheading">{description}</Typography>
+                <Typography variant="h4">{title}</Typography>
+                <Typography variant="subtitle1">{description}</Typography>
               </>
             )}
           </Paper>

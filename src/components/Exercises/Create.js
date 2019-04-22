@@ -16,7 +16,7 @@ export default props => {
   const [isOpen, setOpen] = useState(false);
   return (
     <div>
-      <Fab color="primary" onClick={() => setOpen(true)}>
+      <Fab color="secondary" size="medium" onClick={() => setOpen(true)}>
         <Add />
       </Fab>
       <Dialog
