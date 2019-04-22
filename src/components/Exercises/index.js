@@ -36,7 +36,6 @@ export default ({
   exercise
 }) => {
   const [editMode, setEditMode] = useState(false);
-  // const [currItemIdViewing, setCurrItemIdViewing] = useState(null);
 
   const saveEdit = id => {
     setEditMode(false);
@@ -50,11 +49,12 @@ export default ({
 
   const deleteSelected = id => {
     onDelete(id);
+
+    if (exercise.id === id) setEditMode(false);
   };
 
   const itemSelected = id => {
     onSelect(id);
-    setEditMode(false);
   };
 
   const {
@@ -64,7 +64,7 @@ export default ({
 
   return (
     <Grid container>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         {/* <LeftPane styles={styles} /> */}
         <Paper style={styles.Paper}>
           {exercises.map(([group, exercises]) => {
@@ -102,7 +102,7 @@ export default ({
           })}
         </Paper>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <Paper style={styles.Paper}>
           {editMode ? (
             <Form
