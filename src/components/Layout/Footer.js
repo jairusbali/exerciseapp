@@ -24,7 +24,7 @@ const footer = ({ muscles, category, onSelect, width }) => {
         <Tab
           label={
             <Typography
-              variant="subheading"
+              variant="subtitle1"
               style={{ textTransform: "capitalize" }}
             >
               All
@@ -37,7 +37,7 @@ const footer = ({ muscles, category, onSelect, width }) => {
               key={muscle}
               label={
                 <Typography
-                  variant="subheading"
+                  variant="subtitle1"
                   style={{ textTransform: "capitalize" }}
                 >
                   {muscle}
