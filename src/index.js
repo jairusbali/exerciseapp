@@ -6,19 +6,12 @@ import * as serviceWorker from "./serviceWorker";
 
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
-import { red, indigo } from "@material-ui/core/colors/";
+import { indigo, purple, cyan, deepPurple } from "@material-ui/core/colors/";
 
 const theme = createMuiTheme({
   palette: {
-    primary: indigo,
-    secondary: {
-      main: indigo[200],
-      light: indigo[100],
-      dark: indigo[300]
-    }
-  },
-  typography: {
-    useNextVariants: true
+    // primary: indigo,
+    // secondary: deepPurple
   }
 });
 

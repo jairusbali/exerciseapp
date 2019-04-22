@@ -10,7 +10,7 @@ import {
   IconButton
 } from "@material-ui/core";
 
-import { withStyles } from "@material-ui/styles";
+import { withStyles } from "@material-ui/core/styles";
 
 import Delete from "@material-ui/icons/Delete";
 import Edit from "@material-ui/icons/Edit";
@@ -20,9 +20,22 @@ import Form from "./Form";
 const styles = theme => ({
   Paper: {
     padding: 20,
-    margin: 10,
-    height: 500,
-    overflowY: "auto"
+    overflowY: "auto",
+
+    [theme.breakpoints.up("sm")]: {
+      height: "calc(100vh - 64px - 48px)"
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: "calc(50vh - 56px - 48px)"
+    }
+  },
+  "@global": {
+    "html, body, #root": {
+      height: "100%"
+    }
+  },
+  Container: {
+    height: "100%"
   }
 });
 
@@ -68,7 +81,7 @@ export default withStyles(styles)(
     } = exercise;
 
     return (
-      <Grid container>
+      <Grid container className={classes.Container}>
         <Grid item xs={12} sm={6}>
           {/* <LeftPane styles={styles} /> */}
           <Paper className={classes.Paper}>
