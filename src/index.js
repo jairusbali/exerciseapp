@@ -10,9 +10,6 @@ const theme = createMuiTheme({
   palette: {
     primary: indigo,
     secondary: blue
-  },
-  spacing: {
-    unit: 10
   }
 });
 

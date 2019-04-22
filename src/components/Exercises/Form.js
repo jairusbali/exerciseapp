@@ -5,8 +5,8 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
-
 import TextField from "@material-ui/core/TextField";
+import { withStyles } from "@material-ui/core/styles";
 
 const initialExerciseState = {
   title: "",
@@ -15,8 +15,15 @@ const initialExerciseState = {
   id: ""
 };
 
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit
+  }
+});
+
 const form = props => {
   const {
+    classes,
     exercise,
     open,
     setOpen,
@@ -102,6 +109,7 @@ const form = props => {
 
       {editMode ? (
         <Button
+          className={classes.button}
           variant="contained"
           onClick={() => saveEdit()}
           color="primary"
@@ -112,6 +120,7 @@ const form = props => {
       ) : (
         <>
           <Button
+            className={classes.button}
             variant="contained"
             onClick={() => setOpen(false)}
             color="primary"
@@ -119,6 +128,7 @@ const form = props => {
             Cancel
           </Button>
           <Button
+            className={classes.button}
             variant="contained"
             onClick={handleModalSubmit}
             color="primary"
@@ -132,4 +142,4 @@ const form = props => {
   );
 };
 
-export default form;
+export default withStyles(styles)(form);
