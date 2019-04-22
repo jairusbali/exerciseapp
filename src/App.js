@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import CssBaseline from "@material-ui/core/CssBaseline";
+
 import { withStyles } from "@material-ui/core/styles";
 
 import { Header, Footer } from "./components/Layout/";
@@ -91,6 +93,7 @@ const app = props => {
 
   return (
     <div>
+      <CssBaseline />
       <Header muscles={muscles} onCreateExercise={onCreateExerciseHandler} />
       <Exercises
         muscles={muscles}
