@@ -73,7 +73,6 @@ const app = props => {
   };
 
   const exerciseSelectEditHandler = id => {
-    console.log("editing", id);
     setSelectedExerciseId(id);
   };
 
