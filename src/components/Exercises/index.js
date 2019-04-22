@@ -36,6 +36,7 @@ export default ({
   exercise
 }) => {
   const [editMode, setEditMode] = useState(false);
+  // const [currItemIdViewing, setCurrItemIdViewing] = useState(null);
 
   const saveEdit = id => {
     setEditMode(false);
@@ -49,7 +50,6 @@ export default ({
 
   const deleteSelected = id => {
     onDelete(id);
-    setEditMode(false);
   };
 
   const itemSelected = id => {

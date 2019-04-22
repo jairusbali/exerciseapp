@@ -62,7 +62,7 @@ const app = props => {
     });
 
     // reset selectedExerciseId
-    setSelectedExerciseId("");
+    if (id === selectedExerciseId) setSelectedExerciseId("");
     setAllExercises(updatedList);
   };
 
@@ -83,10 +83,9 @@ const app = props => {
     });
 
     // append the newly edited exercise to the set
+    // i.e. adding new edited item
     setAllExercises([...exercisesNotBeingEdited, exercise]);
   };
-
-  useEffect(() => {}, [selectedCategory, selectedExerciseId]);
 
   const formattedExerciseList = formattedExercises(allExercises);
 
