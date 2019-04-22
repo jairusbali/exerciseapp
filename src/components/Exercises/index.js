@@ -19,23 +19,22 @@ import Form from "./Form";
 
 const styles = theme => ({
   Paper: {
-    padding: 20,
+    padding: theme.spacing.unit * 2,
     overflowY: "auto",
-
     [theme.breakpoints.up("sm")]: {
       height: "calc(100vh - 64px - 48px)"
     },
     [theme.breakpoints.down("xs")]: {
-      height: "calc(50vh - 56px - 48px)"
-    }
-  },
-  "@global": {
-    "html, body, #root": {
+      height: "calc(50vh - 28px - 24px)"
+    },
+    "@global": {
+      "html, body, #root": {
+        height: "100%"
+      }
+    },
+    Container: {
       height: "100%"
     }
-  },
-  Container: {
-    height: "100%"
   }
 });
 

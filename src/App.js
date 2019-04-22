@@ -1,15 +1,8 @@
-import React, { useState, useEffect } from "react";
-
-
-
+import React, { useState } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
-
 import { withStyles } from "@material-ui/core/styles";
-
 import { Header, Footer } from "./components/Layout/";
-
 import Exercises from "./components/Exercises/";
-
 import { muscles, exercises } from "./store";
 
 const styles = theme => ({
@@ -45,7 +38,6 @@ const formattedExercises = exercises => {
 };
 
 const app = props => {
-  const { classes } = props;
 
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedExerciseId, setSelectedExerciseId] = useState("");

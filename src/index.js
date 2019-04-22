@@ -3,15 +3,16 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-
-import { indigo, purple, cyan, deepPurple } from "@material-ui/core/colors/";
+import { indigo, blue } from "@material-ui/core/colors";
 
 const theme = createMuiTheme({
   palette: {
-    // primary: indigo,
-    // secondary: deepPurple
+    primary: indigo,
+    secondary: blue
+  },
+  spacing: {
+    unit: 10
   }
 });
 
